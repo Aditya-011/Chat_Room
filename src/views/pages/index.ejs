@@ -8,10 +8,22 @@
       * {
         font-family: "Lato", sans-serif;
       }
-      .container {
+      body {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10vh;
+        background: #d9dad7;
+        width: 80vw;
+        border-radius: 5px;
+        height: 15rem;
       }
 
       .title {
@@ -40,13 +52,17 @@
         height: 3rem;
         width: 6rem;
       }
+      .wrapper {
+        margin-top: 1rem;
+      }
     </style>
   </head>
 
   <body>
     <h1 class="title">Chat App</h1>
-    <h3 class="header">Login with your Google...</h3>
+
     <div class="container">
+      <h3 class="header">Login with your Google...</h3>
       <div class="wrapper">
         <a href="/google" class="link">
           <button>
