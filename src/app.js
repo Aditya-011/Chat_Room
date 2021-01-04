@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const http = require("http").createServer(app);
+const PORT = process.env.PORT || 5000;
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 require("./passport-setup");
@@ -55,11 +57,29 @@ app.get(
     res.redirect("/good");
   }
 );
+app.use(express.static(__dirname + "/public"));
 
 app.get("/logout", (req, res) => {
   req.session = null;
   req.logout();
   res.redirect("/");
 });
+app.get("/enter", (req, res) => {
+  res.render("pages/chat", {
+    name: req.user.displayName,
+    pic: req.user.photos[0].value,
+    email: req.user.emails[0].value,
+  });
+});
+http.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});
+// Socket
+const io = require("socket.io")(http);
 
-app.listen(5000, () => console.log(`Example app listening on port ${5000}!`));
+io.on("connection", (socket) => {
+  console.log("Connected...");
+  socket.on("message", (msg) => {
+    socket.broadcast.emit("message", msg);
+  });
+});
