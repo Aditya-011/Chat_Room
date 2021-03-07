@@ -39,8 +39,10 @@ socket.on("output-messages", (data) => {
 
   data.forEach((msg) => {
     if (msg.user != curname) {
+      appendMessage(msg, "outgoing");
+      //console.log(`${msg.user} & ${curname}`);
+    } else {
       appendMessage(msg, "incoming");
-      console.log(`${msg.user} & ${curname}`);
     }
     //console.log("from db");
   });
