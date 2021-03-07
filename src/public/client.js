@@ -1,11 +1,14 @@
+//const { name } = require("ejs");
+
 //////////////     DECLARATIONS     //////////////////////////////
 const socket = io();
 let name;
+
 let textarea = document.querySelector("#textarea");
 let messageArea = document.querySelector(".message__area");
 name = document.querySelector(".name").innerHTML;
 //////////////////////////////////////////////////////
-
+let curname = name;
 //var time = new Date().toLocaleTimeString();
 //console.log(time);
 //console.log(name);
@@ -34,12 +37,13 @@ function sendMessage(messages, type) {
 socket.on("output-messages", (data) => {
   // console.log(data);
 
-  if (1) {
-    data.forEach((msg) => {
+  data.forEach((msg) => {
+    if (msg.user != curname) {
       appendMessage(msg, "incoming");
-      console.log("from db");
-    });
-  }
+      console.log(`${msg.user} & ${curname}`);
+    }
+    //console.log("from db");
+  });
 });
 function appendMessage(msg, type) {
   let mainDiv = document.createElement("div");
@@ -56,13 +60,10 @@ function appendMessage(msg, type) {
 
 // Recieve messages
 socket.on("message", (msg) => {
-  appendMessage(msg, "incoming");
+  if (msg.user != curname) {
+    appendMessage(msg, "incoming");
+  }
   scrollToBottom();
-});
-
-/////////     DISCONNECT ALERT      ////////////////////
-socket.on("disconnect", (name) => {
-  console.log(`${name} left`);
 });
 
 ///////////////   SCROLL TO LAST MESSAGE    /////////////
