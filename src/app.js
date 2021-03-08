@@ -6,17 +6,23 @@ const PORT = process.env.PORT || 3000;
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 require("./passport-setup");
-////////////////////        MONGO SETUP ////////////////////
+const io = require("socket.io")(http);
 const mongoose = require("mongoose");
 const Msg = require("./models/messages");
-const db = "mongodb://localhost:27017";
+const db = process.env.DBURL;
+////////////////////        MONGO SETUP ////////////////////
+
 mongoose
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("DB Connected...");
   })
   .catch((err) => console.log(err));
-/////////////////////////////////////////////////////////////
+
+///////////////     MIDDLEWARES     /////////////////
+app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
+
 // For an actual app you should configure this with an experation time, better keys, proxy and secure
 app.use(
   cookieSession({
@@ -25,8 +31,6 @@ app.use(
   })
 );
 
-app.set("view engine", "ejs");
-/////////////////////////////////////////////////////////////
 // Auth middleware that checks if the user is logged in
 const isLoggedIn = (req, res, next) => {
   if (req.user) {
@@ -40,6 +44,7 @@ const isLoggedIn = (req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
+//////////////      ROUTES      //////////////
 // Example protected and unprotected routes
 app.get("/", (req, res) => res.render("pages/index"));
 app.get("/failed", (req, res) => res.send("You Failed to log in!"));
@@ -67,7 +72,6 @@ app.get(
     res.redirect("/good");
   }
 );
-app.use(express.static(__dirname + "/public"));
 
 app.get("/logout", (req, res) => {
   req.session = null;
@@ -81,12 +85,9 @@ app.get("/enter", (req, res) => {
     email: req.user.emails[0].value,
   });
 });
-////////////////////////////////////      SERVER //////////////////////////////
-http.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
+
 // Socket
-const io = require("socket.io")(http);
+
 ///////////////////////////////      SOCKET CONNECTION     //////////////////
 
 io.on("connection", (socket) => {
@@ -103,71 +104,33 @@ io.on("connection", (socket) => {
     const user = msg.user;
     const messages = msg.messages;
     const time = msg.time;
-    const type = msg.type;
+    const date = new Date().getDate();
+    //REMOVE MESSAGES FROM DB
+    if (user === process.env.ADMIN && messages === process.env.DELETE) {
+      Msg.remove()
+        .then(function () {
+          console.log("Data deleted"); // Success
+        })
+        .catch(function (error) {
+          console.log(error); // Failure
+        });
+    }
     const message = new Msg({
       user,
       messages,
       time,
-      type,
+      date,
     });
-    message.save().then(() => {
-      console.log("J9");
-      io.emit("message", msg);
-    });
-  });
-});
 
-/*io.on("connection", (socket) => {
-  console.log("Connected with Socket.io");
-  ///
-  Msg.find().then((result) => {
-    socket.emit("output-messages", result);
-  });
-
-
-
-
-
-  
-
-
-
-/*
-
-  io.on("connection", (socket) => {
-    Msg.find().then((result) => {
-      socket.emit("output-messages", result);
-    });
-    console.log("a user connected");
-    socket.emit("message", "Hello world");
-    socket.on("disconnect", () => {
-      console.log("user disconnected");
-    });
-    socket.on("chatmessage", (msg) => {
-      const message = new Msg({ msg });
+    if (msg.messages != "/deleteall") {
       message.save().then(() => {
+        console.log("J9");
         io.emit("message", msg);
       });
-    });
+    }
   });
-  
-
-
-
-
-  /////////////////////////////////////////////
-  /*socket.on("message", (msg) => {
-    // socket.broadcast.emit("message", msg);
-    const message = new Msg({ msg });
-    message.save().then(() => {
-      console.log("asdfdgbfd");
-      io.emit("message", msg);
-    });
-  });
-  socket.on("leave", ({ name }) => {
-    socket.broadcast.emit("message", `${name} left`);
-  });
-  socket.on("disconnect", (name) => {
-    console.log(`${name} left`);
-  });
-});*/
+});
+////////////////////////////////////      SERVER //////////////////////////////
+http.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});

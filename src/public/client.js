@@ -7,46 +7,56 @@ let name;
 let textarea = document.querySelector("#textarea");
 let messageArea = document.querySelector(".message__area");
 name = document.querySelector(".name").innerHTML;
-//////////////////////////////////////////////////////
 let curname = name;
+//////////////////////////////////////////////////////
+
 //var time = new Date().toLocaleTimeString();
 //console.log(time);
 //console.log(name);
 textarea.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
-    sendMessage(e.target.value, "outgoing");
+    sendMessage(e.target.value);
   }
 });
 ////////////////   SEND MESSAGE TO SOCKET SERVER     ///////
-function sendMessage(messages, type) {
+function sendMessage(messages) {
   let msg = {
     user: name,
     messages: messages.trim(),
     time: new Date().toLocaleTimeString(),
-    type: type,
   };
 
   ///////      APPEND MESSAGE TO CHATROOM  /////////
-  appendMessage(msg, "outgoing");
-  textarea.value = "";
-  scrollToBottom();
+  if (msg.messages != "/deleteall") {
+    appendMessage(msg, "outgoing");
+    textarea.value = "";
+    scrollToBottom();
+  } else {
+    textarea.value = "";
+    scrollToBottom();
+  }
 
-  // Send to server
+  /////////////////////    SEND MESSAGE TO SOCKET SERVER
   socket.emit("chatmessage", msg);
 }
+
+/////////////////////////////     RENDER MESSAGES FROM CLOUD    ///////////
 socket.on("output-messages", (data) => {
   // console.log(data);
 
   data.forEach((msg) => {
     if (msg.user != curname) {
-      appendMessage(msg, "outgoing");
+      appendMessage(msg, "incoming");
       //console.log(`${msg.user} & ${curname}`);
     } else {
-      appendMessage(msg, "incoming");
+      appendMessage(msg, "outgoing");
     }
     //console.log("from db");
+    scrollToBottom();
   });
 });
+
+/////////////   RENDER MESSAGES     //////////////
 function appendMessage(msg, type) {
   let mainDiv = document.createElement("div");
   let className = type;
@@ -60,7 +70,7 @@ function appendMessage(msg, type) {
   messageArea.appendChild(mainDiv);
 }
 
-// Recieve messages
+///////////        RECEIVE MESSAGES FROM SOCKET SERVER    ////////
 socket.on("message", (msg) => {
   if (msg.user != curname) {
     appendMessage(msg, "incoming");
