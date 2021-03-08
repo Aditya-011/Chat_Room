@@ -100,7 +100,7 @@ io.on("connection", (socket) => {
     console.log("user disconnected");
   });
   socket.on("chatmessage", (msg) => {
-    console.log(msg);
+    // console.log(msg);
     const user = msg.user;
     const messages = msg.messages;
     const time = msg.time;
