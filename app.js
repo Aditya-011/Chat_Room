@@ -13,7 +13,12 @@ const db = process.env.DBURL;
 ////////////////////        MONGO SETUP ////////////////////
 
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: true,
+  })
   .then(() => {
     console.log("DB Connected...");
   })

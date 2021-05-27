@@ -13,6 +13,7 @@ body {
   background: #f8f8f8;
   font-family: "Roboto", sans-serif;
 }
+
 section.chat__section {
   width: 800px;
   max-width: 90%;
@@ -72,4 +73,8 @@ textarea {
   left: 0;
   color: #333;
   font-size: 14px;
+}
+.button {
+  display: flex;
+  justify-content: center;
 }
