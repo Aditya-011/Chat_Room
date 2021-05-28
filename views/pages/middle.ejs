@@ -53,14 +53,8 @@
         margin: 1.5rem 2rem;
       }
 
-      .enterBtn {
-        padding: 0.4rem 0.6rem;
-
-        color: #ffffff;
-        font-size: 1.1rem;
-        border: none;
-        border-radius: 2px;
-        cursor: pointer;
+      .link {
+        text-decoration: none;
       }
       .enterBtnCover {
         margin-top: 2rem;
@@ -95,7 +89,7 @@
     <div class="wrapper">
       <div class="cover">
         <div class="close">
-          <a href="/logout">
+          <a href="/logout" class="link">
             <button class="mdc-button mdc-button--raised">
               <span class="mdc-button__label">Log out</span>
             </button></a
@@ -114,7 +108,7 @@
           <h4><%= email %></h4>
         </div>
         <div class="enterBtnCover">
-          <a href="/enter"
+          <a href="/enter" class="link"
             ><button class="mdc-button mdc-button--raised">
               <span class="mdc-button__label">Enter Chat Room</span>
             </button></a
