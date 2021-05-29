@@ -111,7 +111,11 @@ io.on("connection", (socket) => {
     const time = msg.time;
     const date = new Date().getDate();
     //REMOVE MESSAGES FROM DB
-    if (user === process.env.ADMIN && messages === process.env.DELETE) {
+    console.log(user);
+    console.log(process.env.ADMIN);
+    console.log(messages);
+    if (user == process.env.ADMIN && messages == "/deleteall") {
+      console.log("flagged");
       Msg.remove()
         .then(function () {
           console.log("Data deleted"); // Success

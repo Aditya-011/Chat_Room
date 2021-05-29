@@ -39,6 +39,7 @@ function sendMessage(messages) {
     textarea.value = "";
     scrollToBottom();
   } else {
+    //console.log("flagged");
     textarea.value = "";
     scrollToBottom();
   }
