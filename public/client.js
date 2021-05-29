@@ -9,8 +9,9 @@ let messageArea = document.querySelector(".message__area");
 name = document.querySelector(".name").innerHTML;
 let curname = name;
 textarea.value = null;
+new SimpleBar(document.getElementById("textarea"));
 //////////////////////////////////////////////////////
-
+//new SimpleBar(document.getElementById("////textarea"));
 //var time = new Date().toLocaleTimeString();
 //console.log(time);
 //console.log(name);

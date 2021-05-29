@@ -14,6 +14,14 @@ body {
   background: #fff;
   font-family: "DM Sans", sans-serif;
 }
+*::-webkit-scrollbar {
+  width: 0.5em;
+  cursor: pointer;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+}
 .header {
   padding: 1rem 2rem;
   margin: 1rem 1.5rem;
