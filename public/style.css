@@ -100,7 +100,7 @@ textarea:focus {
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   margin-bottom: 1.5rem;
-  max-width: 50vw;
+  max-width: 40vw;
   min-width: 100px;
   position: relative;
   height: auto;
@@ -132,4 +132,60 @@ textarea:focus {
 }
 .link {
   text-decoration: none;
+}
+@media only screen and (max-width: 1050px) {
+  .header {
+    width: 15vw;
+    padding: 1rem 1.5rem;
+  }
+  .profilePic {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .header {
+    width: 15vw;
+    padding: 1rem 1.2rem;
+    margin: 1rem 1rem;
+    margin-left: -0.3rem;
+  }
+  .profilePic {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    border-radius: 50%;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .header {
+    width: 15vw;
+    padding: 1rem 1rem;
+    margin: 1rem 0.9rem;
+    margin-left: -0.3rem;
+  }
+  .message__area {
+    width: 75vw;
+  }
+}
+@media only screen and (max-width: 550px) {
+  textarea::placeholder {
+    font-size: 0.7rem;
+  }
+  .header {
+    display: none;
+  }
+  textarea {
+    font-size: 0.8rem;
+  }
+  .message {
+    font-size: 0.8rem;
+  }
+  h4 {
+    font-size: 8px;
+  }
+  .time {
+    font-size: 7px;
+  }
 }

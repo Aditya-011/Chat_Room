@@ -40,7 +40,7 @@
       .cover {
         background: #f3f6fb;
         width: 70vw;
-        height: 70vh;
+        height: 80%;
         border-radius: 25px;
         box-shadow: 10px 10px 23px -1px rgba(0, 0, 0, 0.53);
         -webkit-box-shadow: 10px 10px 23px -1px rgba(0, 0, 0, 0.53);
@@ -82,6 +82,40 @@
         font-size: 1.7rem;
         margin-top: 1rem;
         text-align: center;
+      }
+      @media only screen and (max-width: 600px) {
+        .welcome {
+          font-size: 1.2rem;
+        }
+        .mdc-button__label {
+          font-size: 0.9rem;
+        }
+        .enterBtnCover {
+          margin-top: 1.5rem;
+        }
+        .close {
+          margin: 1rem 1.5rem;
+        }
+      }
+      @media only screen and (max-width: 350px) {
+        .welcome {
+          font-size: 0.8rem;
+          margin-top: 0rem;
+        }
+        .name,
+        .email {
+          font-size: 0.7rem;
+          margin-top: 0.1rem;
+        }
+        .mdc-button__label {
+          font-size: 0.8rem;
+        }
+        .enterBtnCover {
+          margin-top: 1rem;
+        }
+        .close {
+          margin: 0.6rem 1rem;
+        }
       }
     </style>
   </head>

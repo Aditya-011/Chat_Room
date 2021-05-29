@@ -63,10 +63,7 @@
         cursor: pointer;
         text-align: center;
       }
-      svg {
-        height: 3rem;
-        width: 6rem;
-      }
+
       .wrapper {
         margin-top: 1rem;
       }
@@ -78,6 +75,14 @@
       }
       .link {
         text-decoration: none;
+      }
+      @media only screen and (max-width: 600px) {
+        .header {
+          font-size: 1.5rem;
+        }
+        .button {
+          font-size: 0.6rem;
+        }
       }
     </style>
   </head>
@@ -92,7 +97,6 @@
           <button class="mdc-button mdc-button--raised">
             <span class="mdc-button__ripple"></span>
             <div class="button">
-              <i class="fab fa-google"></i>
               <span class="mdc-button__label">Sign in</span>
             </div>
           </button>
