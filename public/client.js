@@ -15,7 +15,14 @@ let curname = name;
 //console.log(name);
 textarea.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
-    sendMessage(e.target.value);
+    if (textarea.value) {
+      sendMessage(e.target.value);
+    }
+  }
+});
+document.querySelector(".sendBtn").addEventListener("click", () => {
+  if (textarea.value) {
+    sendMessage(textarea.value);
   }
 });
 ////////////////   SEND MESSAGE TO SOCKET SERVER     ///////
@@ -59,12 +66,14 @@ socket.on("output-messages", (data) => {
 /////////////   RENDER MESSAGES     //////////////
 function appendMessage(msg, type) {
   let mainDiv = document.createElement("div");
+  console.log(typeof msg.messages);
   let className = type;
   mainDiv.classList.add(className, "message");
 
   let markup = `
         <h4>${msg.user}</h4>
-        <p>${msg.messages}<br> ${msg.time}</br></p>
+        <p>${msg.messages}</p>
+        <p class="time">${msg.time}</p>
     `;
   mainDiv.innerHTML = markup;
   messageArea.appendChild(mainDiv);

@@ -29,14 +29,17 @@ body {
 }
 .profilePic {
   position: relative;
+  border-radius: 50%;
 }
 
 .chat__section {
   width: 80vw;
+
   border-radius: 15px;
   background: #fff;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  margin-bottom: 10vh;
 }
 h1 {
   text-align: center;
@@ -53,31 +56,54 @@ h1 {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  padding-top: 40px;
+  padding-top: 2rem;
+  overflow-x: hidden;
 }
 textarea {
   width: 100%;
   border: none;
   padding: 20px;
   font-size: 16px;
+  overflow-y: auto;
   outline: none;
-  background: #fbfbfb;
+  resize: none;
+  font-family: "DM Sans", sans-serif;
+  background: #e6e9ed;
+  transition: 0.25ms all;
+  border-radius: 0 0 15px 15px;
+  flex: 20;
 }
-
+.sendBtn {
+  flex: 1;
+  margin: 1rem;
+  border-radius: 50%;
+  width: 40px;
+}
+textarea:focus {
+  height: 15vh;
+}
+.bottom {
+  display: flex;
+  background: #e6e9ed;
+}
 .message {
-  padding: 1rem 0.8rem;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  margin-bottom: 40px;
-
+  padding: 0.5rem 0.8rem;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-bottom: 1.5rem;
+  max-width: 50vw;
+  min-width: 100px;
   position: relative;
+  height: auto;
+  overflow-wrap: break-word;
 }
 .incoming {
-  background: #2d6cdf;
+  background: #6e14ef;
   color: #fff;
 }
 .outgoing {
-  background: #e2f3f5;
+  background: #e6e9ed;
   color: #303a52;
   margin-left: auto;
 }
@@ -86,7 +112,11 @@ textarea {
   top: -20px;
   left: 0;
   color: #333;
-  font-size: 14px;
+  font-size: 11px;
+}
+.time {
+  font-size: 10px;
+  text-align: right;
 }
 .button {
   display: flex;
