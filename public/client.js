@@ -8,6 +8,7 @@ let textarea = document.querySelector("#textarea");
 let messageArea = document.querySelector(".message__area");
 name = document.querySelector(".name").innerHTML;
 let curname = name;
+textarea.value = null;
 //////////////////////////////////////////////////////
 
 //var time = new Date().toLocaleTimeString();
@@ -15,15 +16,11 @@ let curname = name;
 //console.log(name);
 textarea.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
-    if (textarea.value) {
-      sendMessage(e.target.value);
-    }
+    sendMessage(e.target.value);
   }
 });
 document.querySelector(".sendBtn").addEventListener("click", () => {
-  if (textarea.value) {
-    sendMessage(textarea.value);
-  }
+  sendMessage(textarea.value);
 });
 ////////////////   SEND MESSAGE TO SOCKET SERVER     ///////
 function sendMessage(messages) {
@@ -32,7 +29,9 @@ function sendMessage(messages) {
     messages: messages.trim(),
     time: new Date().toLocaleTimeString(),
   };
-
+  if (messages.length > 1) {
+    console.log(messages.length);
+  }
   ///////      APPEND MESSAGE TO CHATROOM  /////////
   if (msg.messages != "/deleteall") {
     appendMessage(msg, "outgoing");
@@ -75,8 +74,11 @@ function appendMessage(msg, type) {
         <p>${msg.messages}</p>
         <p class="time">${msg.time}</p>
     `;
-  mainDiv.innerHTML = markup;
-  messageArea.appendChild(mainDiv);
+  if (msg.messages.length > 1) {
+    mainDiv.innerHTML = markup;
+    messageArea.appendChild(mainDiv);
+    0;
+  }
 }
 
 ///////////        RECEIVE MESSAGES FROM SOCKET SERVER    ////////
