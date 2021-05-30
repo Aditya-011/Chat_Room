@@ -83,7 +83,7 @@ app.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
-app.get("/enter", (req, res) => {
+app.get("/chatroom", (req, res) => {
   res.render("pages/chat", {
     name: req.user.displayName,
     pic: req.user.photos[0].value,
