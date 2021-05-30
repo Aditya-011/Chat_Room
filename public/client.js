@@ -31,7 +31,7 @@ function sendMessage(messages) {
     time: new Date().toLocaleTimeString(),
   };
   if (messages.length > 1) {
-    console.log(messages.length);
+    //console.log(messages.length);
   }
   ///////      APPEND MESSAGE TO CHATROOM  /////////
   if (msg.messages != "/deleteall") {
@@ -67,7 +67,7 @@ socket.on("output-messages", (data) => {
 /////////////   RENDER MESSAGES     //////////////
 function appendMessage(msg, type) {
   let mainDiv = document.createElement("div");
-  console.log(typeof msg.messages);
+  //console.log(typeof msg.messages);
   let className = type;
   mainDiv.classList.add(className, "message");
 

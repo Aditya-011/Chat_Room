@@ -99,10 +99,10 @@ io.on("connection", (socket) => {
   Msg.find().then((result) => {
     socket.emit("output-messages", result);
   });
-  console.log("a user connected");
+  //console.log("a user connected");
   //socket.emit("message", "Hello world");
   socket.on("disconnect", () => {
-    console.log("user disconnected");
+    //console.log("user disconnected");
   });
   socket.on("chatmessage", (msg) => {
     // console.log(msg);
@@ -111,11 +111,11 @@ io.on("connection", (socket) => {
     const time = msg.time;
     const date = new Date().getDate();
     //REMOVE MESSAGES FROM DB
-    console.log(user);
-    console.log(process.env.ADMIN);
-    console.log(messages);
+    //console.log(user);
+    //console.log(process.env.ADMIN);
+    //console.log(messages);
     if (user == process.env.ADMIN && messages == "/deleteall") {
-      console.log("flagged");
+      //console.log("flagged");
       Msg.remove()
         .then(function () {
           console.log("Data deleted"); // Success
@@ -133,7 +133,7 @@ io.on("connection", (socket) => {
 
     if (msg.messages != "/deleteall") {
       message.save().then(() => {
-        console.log("J9");
+        //console.log("J9");
         io.emit("message", msg);
       });
     }
