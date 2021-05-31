@@ -179,6 +179,9 @@ textarea:focus {
   .chat__section {
     flex: 1;
   }
+  .wrapper {
+    flex-direction: column;
+  }
   .profilePic {
     display: none;
   }
