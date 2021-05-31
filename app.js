@@ -34,6 +34,7 @@ app.use(
     name: "tuto-session",
     keys: ["key1", "key2"],
     maxAge: 1728000000,
+    expires: new Date.setDate(15),
   })
 );
 
