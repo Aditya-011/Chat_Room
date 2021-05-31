@@ -26,6 +26,7 @@ For Live demo, [click here:](https://talk-me-chat.herokuapp.com/)
 <img src="images/ss3.png">
 <br>
 <h3> Mobile View</h3>
-<img src="images/ss4.png">
+
 <img src="images/ss5.png">
 <img src="images/ss6.png">
+<img src="images/ss4.png">
