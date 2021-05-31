@@ -33,11 +33,9 @@ app.use(
   cookieSession({
     name: "tuto-session",
     keys: ["key1", "key2"],
+    maxAge: "172800s",
   })
 );
-app.use(function (req, res, next) {
-  req.sessionOptions.maxAge = req.session.maxAge || "172800s";
-});
 
 // Auth middleware that checks if the user is logged in
 const isLoggedIn = (req, res, next) => {
