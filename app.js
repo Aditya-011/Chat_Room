@@ -35,6 +35,9 @@ app.use(
     keys: ["key1", "key2"],
   })
 );
+app.use(function (req, res, next) {
+  req.sessionOptions.maxAge = req.session.maxAge || 172800;
+});
 
 // Auth middleware that checks if the user is logged in
 const isLoggedIn = (req, res, next) => {
