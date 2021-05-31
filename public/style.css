@@ -177,9 +177,11 @@ textarea:focus {
     flex: 1;
     width: 75vw;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
   }
   .logout {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   .name {
     font-size: 0.8rem;
