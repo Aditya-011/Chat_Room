@@ -33,8 +33,8 @@ app.use(
   cookieSession({
     name: "tuto-session",
     keys: ["key1", "key2"],
-    maxAge: 1728000000,
-    expires: Date.setDate(15),
+    maxAge: 1000 * 60 * 120,
+    expires: 1000 * 60 * 120,
   })
 );
 
