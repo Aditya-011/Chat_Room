@@ -36,7 +36,7 @@ app.use(
   })
 );
 app.use(function (req, res, next) {
-  req.sessionOptions.maxAge = req.session.maxAge || 172800;
+  req.sessionOptions.maxAge = req.session.maxAge || "172800s";
 });
 
 // Auth middleware that checks if the user is logged in
